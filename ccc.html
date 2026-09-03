@@ -10,8 +10,8 @@
   :root{
     --paper:#FBFBF9; --card:#FFFFFF; --ink:#1F2421; --muted:#5C6660; --line:#E4E6E0;
     --go:#3E7C5A; --go-deep:#2F5F45; --right:#2E7D4F; --right-bg:#E8F3EC;
-    --wrong:#B23A3A; --wrong-bg:#F6E7E5; --focus:#3E7C5A; --warn-bg:#FBF4E2; --warn-line:#D9B25A; --warn-ink:#7a5a1c;
-    font-size:17px;
+    --wrong:#B23A3A; --wrong-bg:#F6E7E5; --plum:#6A4C6E; --focus:#3E7C5A;
+    --warn-bg:#FBF4E2; --warn-line:#D9B25A; --warn-ink:#7a5a1c; font-size:17px;
   }
   *{box-sizing:border-box} html,body{margin:0;padding:0}
   body{background:var(--paper);color:var(--ink);
@@ -28,19 +28,17 @@
   label.field{display:block;font-size:.85rem;color:var(--muted);margin:0 0 6px}
   textarea{width:100%;min-height:150px;resize:vertical;border:1px solid var(--line);border-radius:10px;
     padding:12px 14px;font:inherit;font-size:1rem;color:var(--ink);background:#fff}
+  input.text{width:100%;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:inherit;font-size:1rem;color:var(--ink);background:#fff}
   textarea:focus,input:focus{outline:2px solid var(--focus);outline-offset:1px;border-color:transparent}
   .opts{display:flex;flex-wrap:wrap;gap:16px;margin:14px 0 4px}
   .opt{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--ink)}
   .opt input{width:20px;height:20px;accent-color:var(--go)}
-  .warn{border:1px solid var(--warn-line);background:var(--warn-bg);color:var(--warn-ink);
-    border-radius:12px;padding:12px 14px;font-size:.85rem;margin-top:14px}
+  .warn{border:1px solid var(--warn-line);background:var(--warn-bg);color:var(--warn-ink);border-radius:12px;padding:12px 14px;font-size:.85rem;margin-top:14px}
   .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-  button{font:inherit;font-weight:600;border-radius:10px;padding:14px 18px;cursor:pointer;
-    background:var(--card);color:var(--ink);border:1px solid var(--line);min-height:52px}
-  button.primary{background:var(--go);color:#fff;border-color:var(--go)}
-  button.primary:active{background:var(--go-deep)}
-  button.grow{flex:1} button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-  button:disabled{opacity:.5;cursor:default}
+  button{font:inherit;font-weight:600;border-radius:10px;padding:14px 18px;cursor:pointer;background:var(--card);color:var(--ink);border:1px solid var(--line);min-height:52px}
+  button.primary{background:var(--go);color:#fff;border-color:var(--go)} button.primary:active{background:var(--go-deep)}
+  button.danger{color:var(--wrong);border-color:var(--wrong)}
+  button.grow{flex:1} button:focus-visible{outline:2px solid var(--focus);outline-offset:2px} button:disabled{opacity:.5;cursor:default}
   .eyebrow{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
   .prompt{color:var(--muted);font-size:.92rem;margin:0 0 14px}
   .menu{display:flex;flex-direction:column;gap:12px;margin-top:6px}
@@ -52,8 +50,7 @@
   @media (max-width:420px){ .word{font-size:2.1rem} }
   .studycard{background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:26px 16px;margin:6px 0 4px}
   .cue{text-align:center;font-style:italic;color:var(--ink);font-size:1rem;margin:12px 0 0}
-  input.answer{width:100%;font-size:1.9rem;font-weight:600;letter-spacing:.06em;text-align:center;
-    border:1px solid var(--line);border-radius:12px;padding:16px 12px;background:#fff;color:var(--ink);margin-top:12px}
+  input.answer{width:100%;font-size:1.9rem;font-weight:600;letter-spacing:.06em;text-align:center;border:1px solid var(--line);border-radius:12px;padding:16px 12px;background:#fff;color:var(--ink);margin-top:12px}
   .compare{display:flex;flex-direction:column;gap:14px;margin:6px 0 2px}
   .cmp-block{background:var(--paper);border-radius:12px;padding:14px 12px;text-align:center}
   .cmp-label{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
@@ -68,19 +65,17 @@
   .verdict.right{background:var(--right-bg);color:#1c5236}
   .verdict.wrong{background:var(--wrong-bg);color:#7a2626}
   .verdict.note{background:var(--warn-bg);color:var(--warn-ink)}
-  table{width:100%;border-collapse:collapse;font-size:.92rem;margin-top:6px}
-  th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
-  th{color:var(--muted);font-weight:600;font-size:.78rem;letter-spacing:.04em}
-  td.n,th.n{text-align:center;width:64px}
-  .yes{color:var(--right);font-weight:700} .no{color:var(--wrong);font-weight:700} .dash{color:var(--muted)}
-  .stat-row{display:flex;gap:10px;flex-wrap:wrap;margin:4px 0 16px}
+  .log{margin-top:18px;display:flex;flex-direction:column;gap:8px}
+  .logrow{display:flex;justify-content:space-between;gap:10px;font-size:.88rem;padding:9px 12px;background:var(--paper);border-radius:10px}
+  .logrow .r{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .logempty{color:var(--muted);font-size:.85rem;margin-top:14px}
+  .stat-row{display:flex;gap:10px;flex-wrap:wrap;margin:4px 0 12px}
   .stat{flex:1;min-width:96px;background:var(--paper);border-radius:12px;padding:14px}
   .stat .big{font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums}
   .stat .lab{font-size:.74rem;color:var(--muted)}
   .foot{color:var(--muted);font-size:.78rem;margin-top:24px;text-align:center}
   @media (prefers-reduced-motion:no-preference){
-    .reveal{animation:fade .18s ease-out}
-    @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+    .reveal{animation:fade .18s ease-out}@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
   }
 </style>
 </head>
@@ -89,19 +84,21 @@
   <header>
     <div>
       <h1>Cover, Copy, Compare <span>&middot; spelling</span></h1>
-      <p class="sub">Test, practice, test again.</p>
+      <p class="sub">Probe, practice, watch it grow.</p>
     </div>
     <div class="progress" id="progress"></div>
   </header>
 
   <div id="jsflag" class="card" style="border-color:var(--warn-line);background:var(--warn-bg);margin-bottom:14px;font-size:.85rem;color:var(--warn-ink)">
     This viewer is not running the page&rsquo;s JavaScript, so the buttons will not work here.
-    Open <b>index.html</b> in a browser (Safari or Chrome) or host it on GitHub Pages.
+    Open <b>ccc.html</b> in a browser (Safari or Chrome) or host it on GitHub Pages.
   </div>
 
   <!-- SETUP -->
   <section class="screen active card" id="setup">
-    <label class="field" for="wordbox">One word per line. For words that sound alike, add a sentence after a vertical bar, like <b>two | I have two hands</b></label>
+    <label class="field" for="learner">Learner name (optional, saved on this device)</label>
+    <input class="text" id="learner" type="text" autocomplete="off" placeholder="e.g. Sam R.">
+    <label class="field" for="wordbox" style="margin-top:14px">One word per line. For words that sound alike, add a sentence after a vertical bar, like <b>two | I have two hands</b></label>
     <textarea id="wordbox" spellcheck="false" autocapitalize="off" autocorrect="off">something
 sometimes
 Sunday
@@ -133,34 +130,55 @@ you're | You're doing a great job.</textarea>
       <label class="opt"><input type="checkbox" id="optCase"> Ignore capitalization</label>
     </div>
     <div id="homoWarn" class="warn" style="display:none"></div>
-    <div class="row"><button class="primary grow" id="start">Set up session</button></div>
-    <p class="foot">Words save on this device. Runs offline once loaded.</p>
+    <div class="row"><button class="primary grow" id="start">Save and continue</button></div>
+    <p class="foot">Everything saves on this device. Runs offline once loaded.</p>
   </section>
 
   <!-- HUB -->
   <section class="screen card" id="hub">
     <p class="eyebrow">Session</p>
-    <p class="prompt" id="hubCount"></p>
+    <p class="prompt" id="hubLearner"></p>
     <div class="menu">
-      <button id="btnPre" type="button"><span class="t">Pretest</span><span class="s" id="preStatus"></span></button>
-      <button id="btnPractice" type="button"><span class="t">Practice</span><span class="s" id="practiceStatus"></span></button>
-      <button id="btnPost" type="button"><span class="t">Posttest</span><span class="s" id="postStatus"></span></button>
-      <button id="btnFinish" type="button"><span class="t">Finish and view results</span><span class="s">Compare pretest to posttest, then export</span></button>
+      <button id="btnProbe" type="button"><span class="t">New probe</span><span class="s" id="probeSub"></span></button>
+      <button id="btnPractice" type="button"><span class="t">Practice</span><span class="s" id="practiceSub"></span></button>
+      <button id="btnResults" type="button"><span class="t">Results and progress</span><span class="s">See the probe-by-probe chart</span></button>
     </div>
-    <div class="row"><button id="hubBack" type="button">Edit word list</button></div>
+    <div class="log" id="log"></div>
+    <div class="row">
+      <button id="hubBack" type="button">Edit word list</button>
+      <button id="btnNewLearner" class="danger" type="button">New learner</button>
+    </div>
+    <div id="confirmReset" class="warn" style="display:none">
+      This erases this device&rsquo;s saved probes and practice history so a new learner starts clean. The word list is kept. Export first if you need the data.
+      <div class="row">
+        <button id="cancelReset" type="button">Cancel</button>
+        <button id="doReset" class="danger grow" type="button">Erase and start fresh</button>
+      </div>
+    </div>
   </section>
 
-  <!-- PROBE (pretest / posttest) -->
+  <!-- RESULTS -->
+  <section class="screen card" id="results">
+    <p class="eyebrow">Progress</p>
+    <div id="plot"></div>
+    <div class="log" id="probeTable"></div>
+    <div class="row">
+      <button id="export" type="button">Export CSV</button>
+      <button id="resultsBack" class="primary grow" type="button">Back to session</button>
+    </div>
+    <p class="foot">CSV holds every probe and practice trial, in long format for R.</p>
+  </section>
+
+  <!-- PROBE -->
   <section class="screen card" id="probe">
-    <p class="eyebrow" id="probeEyebrow">Pretest</p>
+    <p class="eyebrow" id="probeEyebrow">Probe</p>
     <p class="prompt">Listen, then spell the word. You will not see it first, and you will not be told if it is right.</p>
     <div class="row" style="margin-top:2px">
       <button class="grow" id="probePlay" type="button">&#9654;&nbsp; Play word</button>
       <button class="grow" id="probeSentence" type="button" style="display:none">&#9654;&nbsp; In a sentence</button>
     </div>
     <p class="cue" id="probeCue" style="display:none"></p>
-    <input class="answer" id="probeAnswer" type="text" inputmode="text" autocomplete="off"
-           autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="type what you hear">
+    <input class="answer" id="probeAnswer" type="text" inputmode="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="type what you hear">
     <div class="row">
       <button id="probeSkip" type="button">I don&rsquo;t know</button>
       <button class="primary grow" id="probeNext">Next</button>
@@ -170,7 +188,7 @@ you're | You're doing a great job.</textarea>
 
   <!-- STUDY -->
   <section class="screen card" id="study">
-    <p class="eyebrow">Step 1 &middot; Look</p>
+    <p class="eyebrow" id="studyEyebrow">Look</p>
     <p class="prompt">Study the spelling. Say it in your head. When you are ready, cover it and write it from memory.</p>
     <div class="studycard"><div class="word" id="studyWord"></div></div>
     <div class="row">
@@ -181,10 +199,9 @@ you're | You're doing a great job.</textarea>
 
   <!-- WRITE -->
   <section class="screen card" id="write">
-    <p class="eyebrow">Step 2 &middot; Write</p>
-    <p class="prompt" id="writePrompt">Write the word from memory. The model is hidden.</p>
-    <input class="answer" id="answer" type="text" inputmode="text" autocomplete="off"
-           autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="type here">
+    <p class="eyebrow">Write</p>
+    <p class="prompt">Write the word from memory. The model is hidden.</p>
+    <input class="answer" id="answer" type="text" inputmode="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="type here">
     <div class="row">
       <button id="hearWrite" type="button">Hear it</button>
       <button class="primary grow" id="uncover">Uncover &amp; compare</button>
@@ -193,7 +210,7 @@ you're | You're doing a great job.</textarea>
 
   <!-- SELF-EVAL -->
   <section class="screen card" id="selfeval">
-    <p class="eyebrow">Step 3 &middot; Compare</p>
+    <p class="eyebrow">Compare</p>
     <p class="prompt">Look at the model and your spelling side by side. Check one letter at a time. Then decide for yourself.</p>
     <div class="compare reveal">
       <div class="cmp-block"><div class="cmp-label">Correct spelling</div><div class="letters" id="seTarget"></div></div>
@@ -219,173 +236,131 @@ you're | You're doing a great job.</textarea>
     <div class="row" id="resultActions"></div>
   </section>
 
-  <!-- SUMMARY -->
-  <section class="screen card" id="summary">
-    <p class="eyebrow">Results</p>
-    <div class="stat-row">
-      <div class="stat"><div class="big" id="sPre"></div><div class="lab">pretest correct</div></div>
-      <div class="stat"><div class="big" id="sPost"></div><div class="lab">posttest correct</div></div>
-      <div class="stat"><div class="big" id="sGain"></div><div class="lab">gain</div></div>
-    </div>
-    <p class="prompt" id="roundsNote"></p>
-    <table>
-      <thead><tr><th>Word</th><th class="n">Pre</th><th class="n">Post</th></tr></thead>
-      <tbody id="sumBody"></tbody>
-    </table>
-    <div class="row">
-      <button id="export" type="button">Export CSV</button>
-      <button class="primary grow" id="backHub">Back to session</button>
-    </div>
-    <p class="foot">CSV is long format (one row per word per phase) for R or any spreadsheet.</p>
+  <!-- CORRECTION (copy) -->
+  <section class="screen card" id="correction">
+    <p class="eyebrow">Fix it</p>
+    <p class="prompt">Copy the correct spelling to lock it in. The model is shown on purpose.</p>
+    <div class="studycard"><div class="word" id="corrModel"></div></div>
+    <input class="answer" id="corrInput" type="text" inputmode="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="copy it exactly">
+    <div class="row"><button class="primary grow" id="corrCheck">Check</button></div>
+    <p class="hint" id="corrMsg"></p>
   </section>
+
 </div>
 
 <script>
 (function(){
   "use strict";
   var $=function(id){return document.getElementById(id);};
-  var screens={setup:$("setup"),hub:$("hub"),probe:$("probe"),study:$("study"),write:$("write"),selfeval:$("selfeval"),result:$("result"),summary:$("summary")};
-  function show(name){for(var k in screens){screens[k].classList.toggle("active",k===name);}}
+  var SCREENS=["setup","hub","results","probe","study","write","selfeval","result","correction"];
+  function show(name){ SCREENS.forEach(function(k){ $(k).classList.toggle("active",k===name); }); }
 
-  var STORE="ccc_words_v1", OPTS="ccc_opts_v1";
-  function saveWords(t){try{localStorage.setItem(STORE,t);}catch(e){}}
-  function loadWords(){try{return localStorage.getItem(STORE);}catch(e){return null;}}
-  function saveOpts(o){try{localStorage.setItem(OPTS,JSON.stringify(o));}catch(e){}}
-  function loadOpts(){try{var s=localStorage.getItem(OPTS);return s?JSON.parse(s):null;}catch(e){return null;}}
+  var CRITERION=2, CAP=5, SPACE=3;
+  var KEY="ccc_state_v2";
+
+  function loadState(){ try{ var s=localStorage.getItem(KEY); return s?JSON.parse(s):null; }catch(e){ return null; } }
+  function saveState(){ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} }
+  var state = loadState() || {learner:"",words:"",opts:{audio:false,shuffle:false,ignore:false},probes:[],practices:[]};
 
   var canSpeak=("speechSynthesis" in window);
   function speakSeq(parts){ if(!canSpeak) return; try{ speechSynthesis.cancel();
     parts.forEach(function(p){ if(!p) return; var u=new SpeechSynthesisUtterance(p); u.rate=.9; speechSynthesis.speak(u); }); }catch(e){} }
   function speakForce(w){ speakSeq([w]); }
-  function speak(w){ if($("optAudio").checked) speakSeq([w]); }
+  function speakOpt(w){ if(state.opts.audio) speakSeq([w]); }
 
-  // Correct letter sequences: boundary-marked, positional.
-  function cls(resp,target){
-    var r="_"+resp+"_", t="_"+target+"_", max=target.length+1, correct=0, n=Math.min(r.length,t.length);
-    for(var i=0;i<n-1;i++){ if(r[i]===t[i]&&r[i+1]===t[i+1]) correct++; }
-    return {correct:correct,max:max};
-  }
+  function cls(resp,target){ var r="_"+resp+"_",t="_"+target+"_",max=target.length+1,c=0,n=Math.min(r.length,t.length);
+    for(var i=0;i<n-1;i++){ if(r[i]===t[i]&&r[i+1]===t[i+1]) c++; } return {correct:c,max:max}; }
   function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
   function apos(s){ return String(s).replace(/[\u2018\u2019\u0060\u00B4\u02BC\u201B]/g,"'"); }
   function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
-
-  // Parse list. Line "word" or "word | cue sentence". Lines without a bar may hold
-  // several comma-separated bare words (backward compatible). A barred line is never
-  // comma-split, so cue sentences can contain commas.
+  function normalize(s){ s=apos(s); return state.opts.ignore?s.toLowerCase():s; }
+  function letters(s){ return normalize(s).replace(/'/g,""); }
+  function outcome(resp,target){
+    if(normalize(resp)===normalize(target)) return "correct";
+    if(/'/.test(normalize(target)) && letters(resp)===letters(target)) return "apostrophe";
+    return "wrong";
+  }
   function parseItems(text){
     var items=[];
-    text.split(/\r?\n/).forEach(function(line){
-      line=line.trim(); if(!line) return;
-      if(line.indexOf("|")>=0){
-        var parts=line.split("|"); var w=parts.shift().trim(); var cue=parts.join("|").trim();
-        if(w) items.push({word:apos(w),cue:apos(cue)});
-      } else {
-        line.split(",").forEach(function(w){ w=w.trim(); if(w) items.push({word:apos(w),cue:""}); });
-      }
+    text.split(/\r?\n/).forEach(function(line){ line=line.trim(); if(!line) return;
+      if(line.indexOf("|")>=0){ var p=line.split("|"); var w=p.shift().trim(); var cue=p.join("|").trim(); if(w) items.push({word:apos(w),cue:apos(cue)}); }
+      else { line.split(",").forEach(function(w){ w=w.trim(); if(w) items.push({word:apos(w),cue:""}); }); }
     });
     return items;
   }
-
-  // Common homophones that a spoken-only prompt cannot disambiguate.
   var HGROUPS=[
-    ["to","too","two"],["there","their","they're"],["your","you're"],["its","it's"],
-    ["hear","here"],["our","hour"],["know","no"],["knight","night"],["new","knew"],
-    ["write","right","rite"],["by","buy","bye"],["for","four","fore"],["one","won"],
-    ["son","sun"],["see","sea"],["be","bee"],["flour","flower"],["meat","meet"],
-    ["week","weak"],["plain","plane"],["pair","pear","pare"],["bear","bare"],
-    ["road","rode","rowed"],["would","wood"],["hole","whole"],["mail","male"],
-    ["tail","tale"],["sail","sale"],["cent","scent","sent"],["deer","dear"],
-    ["eye","aye"],["ate","eight"],["blue","blew"],["threw","through"],["allowed","aloud"],
-    ["break","brake"],["cell","sell"],["die","dye"],["fair","fare"],["great","grate"],
-    ["heal","heel"],["made","maid"],["peace","piece"],["rain","reign","rein"],
-    ["role","roll"],["seam","seem"],["steal","steel"],["toe","tow"],["waist","waste"],
-    ["wait","weight"],["weather","whether"],["which","witch"],["wear","where","ware"],
-    ["flew","flu","flue"],["guest","guessed"],["knot","not"],["loan","lone"],
-    ["morning","mourning"],["pause","paws"],["rap","wrap"],["ring","wring"],
-    ["scene","seen"],["so","sew","sow"],["some","sum"],["stair","stare"],
-    ["tide","tied"],["vain","vein","vane"],["days","daze"]
+    ["to","too","two"],["there","their","they're"],["your","you're"],["its","it's"],["hear","here"],["our","hour"],
+    ["know","no"],["knight","night"],["new","knew"],["write","right","rite"],["by","buy","bye"],["for","four","fore"],
+    ["one","won"],["son","sun"],["see","sea"],["be","bee"],["flour","flower"],["meat","meet"],["week","weak"],
+    ["plain","plane"],["pair","pear","pare"],["bear","bare"],["road","rode","rowed"],["would","wood"],["hole","whole"],
+    ["mail","male"],["tail","tale"],["sail","sale"],["cent","scent","sent"],["deer","dear"],["eye","aye"],["ate","eight"],
+    ["blue","blew"],["threw","through"],["allowed","aloud"],["break","brake"],["cell","sell"],["die","dye"],["fair","fare"],
+    ["great","grate"],["heal","heel"],["made","maid"],["peace","piece"],["rain","reign","rein"],["role","roll"],
+    ["seam","seem"],["steal","steel"],["toe","tow"],["waist","waste"],["wait","weight"],["weather","whether"],
+    ["which","witch"],["wear","where","ware"],["flew","flu","flue"],["guest","guessed"],["knot","not"],["loan","lone"],
+    ["morning","mourning"],["pause","paws"],["rap","wrap"],["ring","wring"],["scene","seen"],["so","sew","sow"],
+    ["some","sum"],["stair","stare"],["tide","tied"],["vain","vein","vane"],["days","daze"]
   ];
   var HMAP={}; HGROUPS.forEach(function(g){ g.forEach(function(w){ HMAP[w]=true; }); });
-  function isHomophone(w){ return !!HMAP[String(w).toLowerCase()]; }
-  function flaggedWords(items){
-    var seen={}, out=[];
-    items.forEach(function(it){ if(isHomophone(it.word) && !it.cue){ var k=it.word.toLowerCase(); if(!seen[k]){seen[k]=1;out.push(it.word);} } });
-    return out;
-  }
-  // Blank the target word out of its cue so on-screen text never reveals spelling.
-  function clozeCue(word,cue){
-    if(!cue) return "";
-    try{ var re=new RegExp("\\b"+word.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\b","ig"); return cue.replace(re,"_____"); }
-    catch(e){ return cue; }
-  }
+  function flaggedWords(items){ var seen={},out=[]; items.forEach(function(it){ if(HMAP[it.word.toLowerCase()]&&!it.cue){ var k=it.word.toLowerCase(); if(!seen[k]){seen[k]=1;out.push(it.word);} } }); return out; }
+  function clozeCue(word,cue){ if(!cue) return ""; try{ var re=new RegExp("\\b"+word.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\b","ig"); return cue.replace(re,"_____"); }catch(e){ return cue; } }
 
   function renderLetters(el,str,other,mode){
     el.innerHTML="";
     if(mode==="plain"){ for(var i=0;i<str.length;i++){var s=document.createElement("span");s.className="l";s.textContent=str[i];el.appendChild(s);} return; }
     var len=Math.max(str.length,other.length);
     for(var j=0;j<len;j++){ var ch=str[j],o=other[j],span=document.createElement("span");span.className="l";
-      if(ch===undefined){span.className+=" miss";span.textContent="_";}
-      else{span.textContent=ch;span.className+=(ch===o?" ok":" bad");}
+      if(ch===undefined){span.className+=" miss";span.textContent="_";} else {span.textContent=ch;span.className+=(ch===o?" ok":" bad");}
       el.appendChild(span); }
   }
 
-  // ---- state ----
-  var order=[], ignoreCase=false, lastWarnedText=null;
-  var pre=[], post=[], practiceRounds=[];
-  function normalize(s){ s=apos(s); return ignoreCase?s.toLowerCase():s; }
-  function letters(s){ return normalize(s).replace(/'/g,""); }
-  // three-way: exact match, letters-right-but-apostrophe-off, or wrong
-  function outcome(resp,target){
-    if(normalize(resp)===normalize(target)) return "correct";
-    if(/'/.test(normalize(target)) && letters(resp)===letters(target)) return "apostrophe";
-    return "wrong";
-  }
+  var order=[], lastWarnedText=null;
 
+  // ---------- setup ----------
   function begin(){
-    var text=$("wordbox").value;
-    var items=parseItems(text);
+    var text=$("wordbox").value; var items=parseItems(text);
     if(!items.length){ $("wordbox").focus(); return; }
     var flagged=flaggedWords(items);
     if(flagged.length && lastWarnedText!==text){
-      $("homoWarn").innerHTML="These words sound like others but have no sentence cue, so a spoken test cannot tell them apart: <b>"
-        +flagged.map(esc).join(", ")+"</b>. Add a sentence after a vertical bar, for example <b>two | I have two hands</b>. "
-        +"Or tap Set up session again to run them as bare words.";
+      $("homoWarn").innerHTML="These words sound like others but have no sentence cue, so a spoken probe cannot tell them apart: <b>"+flagged.map(esc).join(", ")+"</b>. Add a sentence after a vertical bar, for example <b>two | I have two hands</b>. Or tap Save and continue again to run them as bare words.";
       $("homoWarn").style.display=""; lastWarnedText=text; return;
     }
     $("homoWarn").style.display="none";
-    saveWords(text);
-    ignoreCase=$("optCase").checked;
-    saveOpts({audio:$("optAudio").checked,shuffle:$("optShuffle").checked,ignore:ignoreCase});
-    order=items.slice(); pre=[]; post=[]; practiceRounds=[];
+    state.learner=$("learner").value.trim();
+    state.words=text;
+    state.opts={audio:$("optAudio").checked,shuffle:$("optShuffle").checked,ignore:$("optCase").checked};
+    saveState();
+    order=items.slice();
     toHub();
   }
 
-  function scoreStr(arr){ return arr.filter(function(r){return r.correct;}).length+"/"+arr.length; }
-  function firstStr(round){ return round.filter(function(r){return r.firstTry;}).length+"/"+round.length; }
-  function setLabel(btn,txt){ btn.querySelector(".t").textContent=txt; }
+  function fmtDate(ts){ try{ return new Date(ts).toLocaleDateString(undefined,{month:"short",day:"numeric"}); }catch(e){ return ""; } }
+  function probePct(pr){ var t=pr.items.length,c=pr.items.filter(function(x){return x.correct;}).length; return t?Math.round(100*c/t):0; }
 
   function toHub(){
     $("progress").textContent="";
-    $("hubCount").textContent=order.length+" words in this list.";
-    $("preStatus").textContent = pre.length ? ("Done. "+scoreStr(pre)+" spelled correctly") : "Baseline. Hear each word and spell it, no feedback";
-    setLabel($("btnPractice"), practiceRounds.length ? "Practice again" : "Practice");
-    $("practiceStatus").textContent = practiceRounds.length
-      ? (practiceRounds.length+" round"+(practiceRounds.length>1?"s":"")+" done. Last round "+firstStr(practiceRounds[practiceRounds.length-1])+" first try")
-      : "Look, cover, write, check your own work";
-    $("postStatus").textContent = post.length ? ("Done. "+scoreStr(post)+" spelled correctly") : "Same test as the pretest, after practice";
-    [$("btnPre"),$("btnPractice"),$("btnPost"),$("btnFinish")].forEach(function(b){ b.classList.remove("primary"); });
-    var next = !pre.length ? $("btnPre") : (!practiceRounds.length ? $("btnPractice") : (!post.length ? $("btnPost") : $("btnFinish")));
-    next.classList.add("primary");
+    $("hubLearner").textContent = (state.learner?state.learner:"This device")+" \u00B7 "+order.length+" words";
+    $("probeSub").textContent = "Next is probe "+(state.probes.length+1)+". Spoken, no feedback.";
+    $("practiceSub").textContent = "Trials to criterion over "+order.length+" words.";
+    // log (newest first)
+    var entries=[];
+    state.probes.forEach(function(pr){ entries.push({ts:pr.ts, label:"Probe "+pr.n, right:probePct(pr)+"% \u00B7 "+pr.items.filter(function(x){return x.correct;}).length+"/"+pr.items.length}); });
+    state.practices.forEach(function(ps){ var m=ps.words.filter(function(w){return w.mastered;}).length; entries.push({ts:ps.ts, label:"Practice "+ps.n, right:"mastered "+m+"/"+ps.words.length}); });
+    entries.sort(function(a,b){ return (a.ts<b.ts?1:-1); });
+    var log=$("log"); log.innerHTML="";
+    if(!entries.length){ var e=document.createElement("div"); e.className="logempty"; e.textContent="No probes or practice yet. Start with a probe to set a baseline."; log.appendChild(e); }
+    else entries.forEach(function(en){ var d=document.createElement("div"); d.className="logrow";
+      d.innerHTML="<span>"+esc(en.label)+"</span><span class='r'>"+esc(en.right)+" \u00B7 "+fmtDate(en.ts)+"</span>"; log.appendChild(d); });
+    $("confirmReset").style.display="none";
     show("hub");
   }
 
-  // ---- probe (pretest / posttest) ----
-  var probePhase="pre", probeOrder=[], probeIdx=0, probeStart=0;
-  function startProbe(phase){
-    probePhase=phase; probeOrder=order.slice(); probeIdx=0;
-    if(phase==="pre") pre=[]; else post=[];
-    $("probeEyebrow").textContent = phase==="pre" ? "Pretest" : "Posttest";
-    $("probeNoAudio").textContent = canSpeak ? "" : "This browser has no text to speech, so the spoken test cannot run here. It works in Safari and Chrome.";
+  // ---------- probe ----------
+  var probeOrder=[], probeIdx=0, probeStart=0, probeItems=[], probeNo=0;
+  function startProbe(){
+    probeNo=state.probes.length+1; probeOrder=order.slice(); probeIdx=0; probeItems=[];
+    $("probeEyebrow").textContent="Probe "+probeNo;
+    $("probeNoAudio").textContent = canSpeak ? "" : "This browser has no text to speech, so the spoken probe cannot run here. It works in Safari and Chrome.";
     loadProbe();
   }
   function loadProbe(){
@@ -395,144 +370,149 @@ you're | You're doing a great job.</textarea>
     $("probeAnswer").value="";
     if(it.cue){ $("probeCue").textContent=clozeCue(it.word,it.cue); $("probeCue").style.display=""; $("probeSentence").style.display=""; }
     else { $("probeCue").textContent=""; $("probeCue").style.display="none"; $("probeSentence").style.display="none"; }
-    show("probe");
-    probeStart=Date.now();
+    show("probe"); probeStart=Date.now();
     setTimeout(function(){ if(it.cue) speakSeq([it.word,it.cue]); else speakSeq([it.word]); $("probeAnswer").focus(); },60);
   }
   function recordProbe(resp){
     var it=probeOrder[probeIdx], w=it.word, ms=Date.now()-probeStart;
     var out = resp.length>0 ? outcome(resp,w) : "wrong";
-    var correct = (out==="correct");
-    var aposOnly = (out==="apostrophe");
     var score=cls(normalize(resp),normalize(w));
-    var rec={phase:probePhase,word:w,resp:resp,correct:correct,aposOnly:aposOnly,cls:score.correct,clsMax:score.max,ms:ms};
-    if(probePhase==="pre") pre.push(rec); else post.push(rec);
+    probeItems.push({word:w,resp:resp,correct:(out==="correct"),aposOnly:(out==="apostrophe"),cls:score.correct,clsMax:score.max,ms:ms});
     probeIdx++; loadProbe();
   }
-  function finishProbe(){ toHub(); }
+  function finishProbe(){ state.probes.push({n:probeNo,ts:new Date().toISOString(),items:probeItems}); saveState(); toHub(); }
 
-  // ---- practice (CCC) ----
-  var pOrder=[], pIdx=0, roundNum=0, currentRound=[], current="";
-  var writeStart=0, attempts=0, pendingResp="", pendingMs=0;
-  var firstTry=true, firstCls=null, firstMs=null, firstSelfOk=null, firstJudged=null, firstApos=null;
-
+  // ---------- practice (trials to criterion) ----------
+  var P=null, curId=null, curWord="", curCue="", writeStart=0, pendingResp="", pendingMs=0;
   function startPractice(){
-    pOrder=order.slice();
-    if($("optShuffle").checked) shuffle(pOrder);
-    pIdx=0; currentRound=[]; roundNum=practiceRounds.length+1;
-    loadWord();
+    var items=order.map(function(it,i){ return {id:i,word:it.word,cue:it.cue}; });
+    var queue=items.map(function(x){return x.id;});
+    if(state.opts.shuffle) shuffle(queue);
+    var ws={}; items.forEach(function(x){ ws[x.id]={streak:0,trials:0,mastered:false,capReached:false}; });
+    P={n:state.practices.length+1, ts:new Date().toISOString(), items:items, queue:queue, ws:ws, log:[]};
+    presentPractice();
   }
-  function loadWord(){
-    if(pIdx>=pOrder.length){ finishRound(); return; }
-    current=pOrder[pIdx].word; attempts=0;
-    firstTry=true; firstCls=null; firstMs=null; firstSelfOk=null; firstJudged=null;
-    $("progress").textContent="Round "+roundNum+" \u00B7 "+(pIdx+1)+"/"+pOrder.length;
-    $("studyWord").textContent=current;
-    show("study"); speak(current);
+  function remaining(){ var r=0; for(var k in P.ws){ if(!P.ws[k].mastered && !P.ws[k].capReached) r++; } return r; }
+  function presentPractice(){
+    if(!P.queue.length){ finishPractice(); return; }
+    curId=P.queue.shift(); var it=P.items[curId]; curWord=it.word; curCue=it.cue;
+    $("studyEyebrow").textContent="Look \u00B7 "+remaining()+" to go";
+    $("progress").textContent="Round "+P.n;
+    $("studyWord").textContent=curWord;
+    show("study"); speakOpt(curWord);
   }
-  function toWrite(){
-    $("answer").value="";
-    $("writePrompt").textContent = attempts>0 ? "Not quite. Write it again, carefully." : "Write the word from memory. The model is hidden.";
-    show("write"); writeStart=Date.now();
-    setTimeout(function(){ $("answer").focus(); },50);
-  }
-  function toSelfEval(){
-    var resp=$("answer").value.trim();
-    if(!resp.length){ $("answer").focus(); return; }
+  function toWriteP(){ $("answer").value=""; show("write"); writeStart=Date.now(); setTimeout(function(){ $("answer").focus(); },50); }
+  function toSelfEvalP(){ var resp=$("answer").value.trim(); if(!resp.length){ $("answer").focus(); return; }
     pendingResp=resp; pendingMs=Date.now()-writeStart;
-    renderLetters($("seTarget"),apos(current),null,"plain");
-    renderLetters($("seResponse"),apos(pendingResp),null,"plain");
-    show("selfeval");
-  }
+    renderLetters($("seTarget"),apos(curWord),null,"plain"); renderLetters($("seResponse"),apos(pendingResp),null,"plain"); show("selfeval"); }
+
+  function requeue(id){ var pos=Math.min(SPACE, P.queue.length); P.queue.splice(pos,0,id); }
+
   function judge(judgedRight){
-    attempts++;
-    var out = outcome(pendingResp,current);
-    var actual = (out==="correct");
-    var aposOnly = (out==="apostrophe");
-    var score = cls(normalize(pendingResp),normalize(current));
-    var selfOk = (judgedRight===actual);
-    if(attempts===1){ firstTry=actual; firstCls=score.correct; firstMs=pendingMs; firstSelfOk=selfOk; firstJudged=judgedRight; firstApos=aposOnly; }
-    renderLetters($("rTarget"),apos(current),null,"plain");
-    renderLetters($("rResponse"),apos(pendingResp),apos(current),(aposOnly?"plain":"mark"));
+    var out=outcome(pendingResp,curWord); var actual=(out==="correct"); var aposOnly=(out==="apostrophe");
+    var selfOk=(judgedRight===actual); var score=cls(normalize(pendingResp),normalize(curWord));
+    var ws=P.ws[curId]; ws.trials++;
+    if(actual) ws.streak++; else ws.streak=0;
+    if(actual && ws.streak>=CRITERION) ws.mastered=true;
+    if(!ws.mastered && ws.trials>=CAP) ws.capReached=true;
+    P.log.push({word:curWord,trial:ws.trials,correct:actual?1:0,aposOnly:aposOnly?1:0,cls:score.correct,clsMax:score.max,ms:pendingMs,judged:judgedRight?1:0,selfOk:selfOk?1:0,mastered:ws.mastered?1:0,capReached:ws.capReached?1:0});
+    renderLetters($("rTarget"),apos(curWord),null,"plain");
+    renderLetters($("rResponse"),apos(pendingResp),apos(curWord),(aposOnly?"plain":"mark"));
     $("clsNote").textContent="Correct letter sequences: "+score.correct+" of "+score.max;
     $("selfNote").textContent="Your check: "+(judgedRight?"\u201Cit matches\u201D":"\u201CI made a mistake\u201D")+"  \u00B7  Actually: "+(actual?"correct":(aposOnly?"right letters, apostrophe off":"has an error"));
-    var v=$("verdict");
-    if(out==="correct"){
-      if(judgedRight){ v.className="verdict right"; v.textContent="Correct, and your check was right. Nice work."; }
-      else { v.className="verdict right"; v.textContent="Good news: you actually spelled it correctly. Your check was too hard on yourself. Every letter matches."; }
-    } else if(out==="apostrophe"){
-      v.className="verdict note";
-      v.textContent = judgedRight
-        ? ("Right letters, but the apostrophe is off. The correct spelling is "+apos(current)+". Watch that apostrophe.")
-        : ("Good eye. The letters are right; the apostrophe is what was off. The correct spelling is "+apos(current)+".");
+    var v=$("verdict"), actions=$("resultActions"); actions.innerHTML="";
+    function retireBtn(){ var b=document.createElement("button"); b.className="primary grow"; b.textContent=(P.queue.length?"Next word":"Finish practice"); b.onclick=function(){ presentPractice(); }; actions.appendChild(b); }
+    function contBtn(){ var b=document.createElement("button"); b.className="primary grow"; b.textContent="Next word"; b.onclick=function(){ requeue(curId); presentPractice(); }; actions.appendChild(b); }
+    function fixBtn(){ var b=document.createElement("button"); b.className="primary grow"; b.textContent="Copy it correctly"; b.onclick=function(){ showCorrection(); }; actions.appendChild(b); }
+    if(!actual){
+      if(aposOnly){ v.className="verdict note"; v.textContent = judgedRight ? ("Right letters, but the apostrophe is off. The correct spelling is "+apos(curWord)+".") : ("Good eye. The letters are right; the apostrophe was off. Correct spelling: "+apos(curWord)+"."); }
+      else { v.className="verdict wrong"; v.textContent = judgedRight ? "Look again. It is not right yet. Compare the underlined letters." : "You caught it. Let us fix it before moving on."; }
+      fixBtn();
+    } else if(ws.mastered){
+      v.className="verdict right"; v.textContent="Mastered. Correct twice in a row."; retireBtn();
+    } else if(ws.capReached){
+      v.className="verdict note"; v.textContent="Correct. That is enough time on this word for today."; retireBtn();
     } else {
-      if(!judgedRight){ v.className="verdict wrong"; v.textContent="You caught it. There is a mistake. Let us fix it before moving on."; }
-      else { v.className="verdict wrong"; v.textContent="Look again. It is not quite right yet. Compare the underlined letters against the model."; }
-    }
-    var actions=$("resultActions"); actions.innerHTML="";
-    if(out==="correct" || out==="apostrophe"){
-      currentRound.push({phase:"practice",round:roundNum,word:current,firstTry:firstTry,aposOnly:firstApos,attempts:attempts,clsFirst:firstCls,clsMax:score.max,msFirst:firstMs,selfOk:firstSelfOk,judged:firstJudged});
-      var next=document.createElement("button"); next.className="primary grow";
-      next.textContent=(pIdx+1>=pOrder.length)?"Finish round":"Next word";
-      next.onclick=function(){ pIdx++; loadWord(); };
-      actions.appendChild(next);
-    }else{
-      var retry=document.createElement("button"); retry.className="primary grow";
-      retry.textContent="Try this word again"; retry.onclick=function(){ toWrite(); };
-      actions.appendChild(retry);
-      var peek=document.createElement("button"); peek.textContent="Study it again";
-      peek.onclick=function(){ show("study"); speak(current); };
-      actions.appendChild(peek);
+      v.className="verdict right"; v.textContent="Correct. One more in a row will master it."; contBtn();
     }
     show("result");
   }
-  function finishRound(){ practiceRounds.push(currentRound); toHub(); }
 
-  // ---- summary ----
-  function showSummary(){
-    $("progress").textContent="";
-    var preN=pre.filter(function(r){return r.correct;}).length;
-    var postN=post.filter(function(r){return r.correct;}).length;
-    $("sPre").textContent = pre.length ? preN+" / "+pre.length : "\u2014";
-    $("sPost").textContent = post.length ? postN+" / "+post.length : "\u2014";
-    $("sGain").textContent = (pre.length && post.length) ? ((postN-preN>=0?"+":"")+(postN-preN)) : "\u2014";
-    $("roundsNote").textContent = practiceRounds.length
-      ? ("Practice: "+practiceRounds.length+" round"+(practiceRounds.length>1?"s":"")+".")
-      : "No practice rounds recorded.";
-    var body=$("sumBody"); body.innerHTML="";
-    function mark(rec){ if(!rec) return "<span class='dash'>\u2014</span>"; return rec.correct?"<span class='yes'>\u2713</span>":"<span class='no'>\u2717</span>"; }
-    for(var i=0;i<order.length;i++){
-      var tr=document.createElement("tr");
-      tr.innerHTML="<td>"+esc(order[i].word)+"</td><td class='n'>"+mark(pre[i])+"</td><td class='n'>"+mark(post[i])+"</td>";
-      body.appendChild(tr);
-    }
-    show("summary");
+  function showCorrection(){ $("corrModel").textContent=curWord; $("corrInput").value=""; $("corrMsg").textContent=""; show("correction"); setTimeout(function(){ $("corrInput").focus(); },50); }
+  function checkCorrection(){
+    var v=$("corrInput").value.trim();
+    if(normalize(v)!==normalize(curWord)){ $("corrMsg").textContent="Not yet. Copy it exactly, apostrophe and all."; $("corrInput").focus(); return; }
+    var ws=P.ws[curId];
+    if(!ws.capReached) requeue(curId);
+    presentPractice();
   }
 
+  function finishPractice(){
+    var words=P.items.map(function(it){ var w=P.ws[it.id]; return {word:it.word, trials:w.trials, mastered:w.mastered, capReached:w.capReached}; });
+    state.practices.push({n:P.n, ts:P.ts, trials:P.log, words:words}); saveState(); toHub();
+  }
+
+  // ---------- results / plot ----------
+  function buildPlot(probes){
+    if(!probes.length) return "<p class='prompt' style='text-align:center'>No probes yet. Run a probe to start the chart.</p>";
+    var W=600,H=250,pad=42,rp=14,tp=22,bp=30;
+    var x0=pad,x1=W-rp,y0=H-bp,y1=tp,n=probes.length;
+    function X(i){ return n>1 ? x0+(x1-x0)*i/(n-1) : (x0+x1)/2; }
+    function Y(p){ return y0-(y0-y1)*(p/100); }
+    var acc=probes.map(function(pr){ var t=pr.items.length,c=pr.items.filter(function(x){return x.correct;}).length; return t?100*c/t:0; });
+    var clsp=probes.map(function(pr){ var s=0,m=0; pr.items.forEach(function(x){s+=x.cls;m+=x.clsMax;}); return m?100*s/m:0; });
+    function series(arr,color){ var pts=arr.map(function(v,i){return X(i).toFixed(1)+","+Y(v).toFixed(1);}).join(" ");
+      var line=n>1?"<polyline fill='none' stroke='"+color+"' stroke-width='2.5' points='"+pts+"'/>":"";
+      var dots=arr.map(function(v,i){return "<circle cx='"+X(i).toFixed(1)+"' cy='"+Y(v).toFixed(1)+"' r='3.6' fill='"+color+"'/>";}).join("");
+      return line+dots; }
+    var grid=""; [0,50,100].forEach(function(g){ var y=Y(g).toFixed(1);
+      grid+="<line x1='"+x0+"' y1='"+y+"' x2='"+x1+"' y2='"+y+"' stroke='#E4E6E0'/>";
+      grid+="<text x='"+(x0-6)+"' y='"+(+y+4)+"' text-anchor='end' font-size='11' fill='#5C6660'>"+g+"</text>"; });
+    var xlab=""; probes.forEach(function(pr,i){ xlab+="<text x='"+X(i).toFixed(1)+"' y='"+(y0+16)+"' text-anchor='middle' font-size='11' fill='#5C6660'>"+pr.n+"</text>"; });
+    var acol="#3E7C5A",ccol="#6A4C6E";
+    var legend="<text x='"+x0+"' y='13' font-size='11' fill='"+acol+"'>\u25CF words correct</text><text x='"+(x0+120)+"' y='13' font-size='11' fill='"+ccol+"'>\u25CF letter sequences</text>";
+    return "<svg viewBox='0 0 "+W+" "+H+"' width='100%' role='img' aria-label='probe accuracy chart'>"+grid+series(clsp,ccol)+series(acc,acol)+xlab+legend+"<text x='"+((x0+x1)/2)+"' y='"+(H-4)+"' text-anchor='middle' font-size='11' fill='#5C6660'>probe number</text></svg>";
+  }
+  function showResults(){
+    $("progress").textContent="";
+    $("plot").innerHTML=buildPlot(state.probes);
+    var t=$("probeTable"); t.innerHTML="";
+    state.probes.slice().reverse().forEach(function(pr){ var d=document.createElement("div"); d.className="logrow";
+      var c=pr.items.filter(function(x){return x.correct;}).length;
+      d.innerHTML="<span>Probe "+pr.n+" \u00B7 "+fmtDate(pr.ts)+"</span><span class='r'>"+c+"/"+pr.items.length+" ("+probePct(pr)+"%)</span>"; t.appendChild(d); });
+    show("results");
+  }
+
+  // ---------- CSV ----------
   function exportCsv(){
-    var rows=[["phase","round","word","first_attempt_correct","apostrophe_only","attempts","cls","cls_max","response_ms","self_judged_correct","self_eval_accurate"]];
-    pre.forEach(function(r){ rows.push(["pre","",r.word,r.correct?1:0,r.aposOnly?1:0,1,r.cls,r.clsMax,r.ms,"",""]); });
-    practiceRounds.forEach(function(round){ round.forEach(function(r){
-      rows.push(["practice",r.round,r.word,r.firstTry?1:0,r.aposOnly?1:0,r.attempts,r.clsFirst,r.clsMax,r.msFirst,r.judged?1:0,r.selfOk?1:0]); }); });
-    post.forEach(function(r){ rows.push(["post","",r.word,r.correct?1:0,r.aposOnly?1:0,1,r.cls,r.clsMax,r.ms,"",""]); });
-    var csv=rows.map(function(row){return row.map(function(c){var s=String(c);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}).join(",");}).join("\n");
-    try{
-      var blob=new Blob([csv],{type:"text/csv"}), url=URL.createObjectURL(blob), a=document.createElement("a");
-      a.href=url; a.download="ccc_session_"+new Date().toISOString().slice(0,10)+".csv";
-      document.body.appendChild(a); a.click();
-      setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},100);
+    var rows=[["record_type","n","timestamp","learner","word","trial_num","correct","apostrophe_only","cls","cls_max","response_ms","self_judged_correct","self_eval_accurate","word_mastered","word_cap_reached"]];
+    var L=state.learner||"";
+    state.probes.forEach(function(pr){ pr.items.forEach(function(x){
+      rows.push(["probe",pr.n,pr.ts,L,x.word,"",x.correct?1:0,x.aposOnly?1:0,x.cls,x.clsMax,x.ms,"","","",""]); }); });
+    state.practices.forEach(function(ps){ ps.trials.forEach(function(x){
+      rows.push(["practice",ps.n,ps.ts,L,x.word,x.trial,x.correct,x.aposOnly,x.cls,x.clsMax,x.ms,x.judged,x.selfOk,x.mastered,x.capReached]); }); });
+    var csv=rows.map(function(r){return r.map(function(c){var s=String(c);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}).join(",");}).join("\n");
+    try{ var blob=new Blob([csv],{type:"text/csv"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+      a.href=url; a.download="ccc_"+(L?L.replace(/[^a-z0-9]+/ig,"_")+"_":"")+new Date().toISOString().slice(0,10)+".csv";
+      document.body.appendChild(a); a.click(); setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},100);
     }catch(e){ alert("Export not available in this view. Open the hosted page to save a file."); }
   }
 
-  // ---- wiring ----
+  // ---------- reset ----------
+  function resetLearner(){ state.learner=""; state.probes=[]; state.practices=[]; saveState(); $("learner").value=""; toHub(); }
+
+  // ---------- wiring ----------
   $("start").onclick=begin;
   $("wordbox").addEventListener("input",function(){ lastWarnedText=null; $("homoWarn").style.display="none"; });
   $("hubBack").onclick=function(){ show("setup"); };
-  $("btnPre").onclick=function(){ startProbe("pre"); };
-  $("btnPost").onclick=function(){ startProbe("post"); };
+  $("btnProbe").onclick=startProbe;
   $("btnPractice").onclick=startPractice;
-  $("btnFinish").onclick=showSummary;
-  $("backHub").onclick=toHub;
+  $("btnResults").onclick=showResults;
+  $("resultsBack").onclick=toHub;
+  $("export").onclick=exportCsv;
+  $("btnNewLearner").onclick=function(){ $("confirmReset").style.display=""; };
+  $("cancelReset").onclick=function(){ $("confirmReset").style.display="none"; };
+  $("doReset").onclick=resetLearner;
 
   $("probePlay").onclick=function(){ speakSeq([probeOrder[probeIdx].word]); };
   $("probeSentence").onclick=function(){ speakSeq([probeOrder[probeIdx].cue]); };
@@ -540,22 +520,24 @@ you're | You're doing a great job.</textarea>
   $("probeSkip").onclick=function(){ recordProbe(""); };
   $("probeAnswer").addEventListener("keydown",function(e){ if(e.key==="Enter"){e.preventDefault();$("probeNext").click();} });
 
-  $("cover").onclick=toWrite;
-  $("replay").onclick=function(){ speakForce(current); };
-  $("hearWrite").onclick=function(){ speakForce(current); };
-  $("uncover").onclick=toSelfEval;
-  $("answer").addEventListener("keydown",function(e){ if(e.key==="Enter"){e.preventDefault();toSelfEval();} });
+  $("cover").onclick=toWriteP;
+  $("replay").onclick=function(){ speakForce(curWord); };
+  $("hearWrite").onclick=function(){ speakForce(curWord); };
+  $("uncover").onclick=toSelfEvalP;
+  $("answer").addEventListener("keydown",function(e){ if(e.key==="Enter"){e.preventDefault();toSelfEvalP();} });
   $("judgeRight").onclick=function(){ judge(true); };
   $("judgeWrong").onclick=function(){ judge(false); };
-  $("export").onclick=exportCsv;
+  $("corrCheck").onclick=checkCorrection;
+  $("corrInput").addEventListener("keydown",function(e){ if(e.key==="Enter"){e.preventDefault();checkCorrection();} });
 
   if(!canSpeak){ $("optAudio").disabled=true; $("replay").style.display="none"; $("hearWrite").style.display="none"; }
 
   var _jf=$("jsflag"); if(_jf) _jf.style.display="none";
-  var saved=loadWords();
-  if(saved!==null && saved.trim().length) $("wordbox").value=saved;
-  var o=loadOpts();
-  if(o){ $("optAudio").checked=!!o.audio&&canSpeak; $("optShuffle").checked=!!o.shuffle; $("optCase").checked=!!o.ignore; }
+  // restore
+  if(state.words && state.words.trim().length) $("wordbox").value=state.words;
+  $("learner").value=state.learner||"";
+  $("optAudio").checked=!!state.opts.audio&&canSpeak; $("optShuffle").checked=!!state.opts.shuffle; $("optCase").checked=!!state.opts.ignore;
+  if(state.words && parseItems(state.words).length){ order=parseItems(state.words); toHub(); } else { show("setup"); }
 })();
 </script>
 </body>
