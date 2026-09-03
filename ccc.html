@@ -74,6 +74,14 @@
   .stat .big{font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums}
   .stat .lab{font-size:.74rem;color:var(--muted)}
   .foot{color:var(--muted);font-size:.78rem;margin-top:24px;text-align:center}
+  .help{min-height:0;padding:6px 10px;font-size:.78rem;border-radius:8px;white-space:nowrap}
+  .modal-backdrop{position:fixed;inset:0;background:rgba(31,36,33,.55);display:none;z-index:50;overflow-y:auto;padding:24px 16px}
+  .modal-backdrop.open{display:block}
+  .modal{background:var(--card);max-width:620px;margin:0 auto;border-radius:14px;padding:24px 22px;border:1px solid var(--line)}
+  .modal h2{font-size:1.15rem;margin:0 0 6px}
+  .modal h3{font-size:.95rem;margin:18px 0 4px;color:var(--go-deep)}
+  .modal p{font-size:.9rem;margin:0 0 8px;color:var(--ink)}
+  .modal b{color:var(--ink)}
   @media (prefers-reduced-motion:no-preference){
     .reveal{animation:fade .18s ease-out}@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
   }
@@ -86,7 +94,10 @@
       <h1>Cover, Copy, Compare <span>&middot; spelling</span></h1>
       <p class="sub">Probe, practice, watch it grow.</p>
     </div>
-    <div class="progress" id="progress"></div>
+    <div style="text-align:right;flex-shrink:0">
+      <div class="progress" id="progress"></div>
+      <button id="helpBtn" class="help" type="button" style="margin-top:6px">How it works</button>
+    </div>
   </header>
 
   <div id="jsflag" class="card" style="border-color:var(--warn-line);background:var(--warn-bg);margin-bottom:14px;font-size:.85rem;color:var(--warn-ink)">
@@ -245,6 +256,33 @@ you're | You're doing a great job.</textarea>
     <div class="row"><button class="primary grow" id="corrCheck">Check</button></div>
     <p class="hint" id="corrMsg"></p>
   </section>
+
+  <div class="modal-backdrop" id="helpModal">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="How it works">
+      <h2>How this app works</h2>
+      <p>Cover, Copy, Compare is a spelling routine: look at the correct spelling, cover it, write it from memory, then check your own writing against the model. This app runs that routine and adds two things around it, a way to measure spelling over time and a way to practice to mastery. It is built for one learner on one device.</p>
+
+      <h3>Probes measure, they do not teach</h3>
+      <p>A probe is a short spelling test. Each word is read aloud, the student types it, and the app shows no model and gives no feedback about whether it was right. That keeps the measurement clean. Run a probe whenever you want a data point, for instance before starting and then every few days. Probes are numbered and dated, and each run is stored as its own point in the series rather than replacing the last one. For words that sound like other words, the app reads a short sentence so the student knows which word is meant, and shows that sentence on screen with the target word blanked out so the spelling is not given away.</p>
+
+      <h3>Practice teaches to a criterion</h3>
+      <p>In practice, each word follows the full cycle: see the model, cover it, write it from memory, and compare. A word counts as mastered once the student spells it correctly twice in a row without help. A miss resets that streak, shows the correct spelling, and has the student copy it once before the word returns a few words later for a fresh attempt. To keep a hard word from becoming a trap, the app stops after five tries in a session and marks the word as not yet mastered, which is itself useful information. The student judges their own spelling first and the app scores it independently, so a wrong self-judgment changes the feedback message but never the recorded data.</p>
+
+      <h3>Apostrophes</h3>
+      <p>A curly apostrophe and a straight one are treated as the same character, so no one is marked wrong for how a keyboard renders it. A missing or misplaced apostrophe is treated as its own case: the letters are credited, but the app points out the apostrophe and has the student copy the correct form, and the word does not count as mastered until the apostrophe is right, since for a word like they're the apostrophe is the whole point.</p>
+
+      <h3>Results and data</h3>
+      <p>The results screen plots each probe, one line for the percent of words spelled correctly and one for the percent of correct letter sequences, which is a more sensitive measure of partial progress. The chart is for a quick look. For real analysis, export the CSV, which holds one row per word for every probe and every practice trial, in a long format that drops straight into R.</p>
+
+      <h3>Where the data lives</h3>
+      <p>Everything is saved in this browser on this device. Nothing is sent anywhere and there is no account. Because of that, the history does not move between devices or browsers, and some browsers, iPhone and iPad Safari in particular, can clear it after about a week without a visit. Treat the CSV export as your real record and save it every session or two. New learner erases this device's probe and practice history so a fresh student starts clean, and keeps the word list.</p>
+
+      <h3>Setting up the word list</h3>
+      <p>Put one word per line. For a word that sounds like another, add a sentence after a vertical bar, like <b>two | I have two hands</b>, and the app reads that sentence during probes. You only need a sentence on the words that need one, and the app warns you if a known homophone is missing its cue.</p>
+
+      <button class="primary" id="helpClose" style="margin-top:18px">Close</button>
+    </div>
+  </div>
 
 </div>
 
@@ -499,7 +537,7 @@ you're | You're doing a great job.</textarea>
   }
 
   // ---------- reset ----------
-  function resetLearner(){ state.learner=""; state.probes=[]; state.practices=[]; saveState(); $("learner").value=""; toHub(); }
+  function resetLearner(){ state.learner=""; state.probes=[]; state.practices=[]; saveState(); $("confirmReset").style.display="none"; $("learner").value=""; show("setup"); setTimeout(function(){ $("learner").focus(); },50); }
 
   // ---------- wiring ----------
   $("start").onclick=begin;
@@ -513,6 +551,10 @@ you're | You're doing a great job.</textarea>
   $("btnNewLearner").onclick=function(){ $("confirmReset").style.display=""; };
   $("cancelReset").onclick=function(){ $("confirmReset").style.display="none"; };
   $("doReset").onclick=resetLearner;
+  $("helpBtn").onclick=function(){ $("helpModal").classList.add("open"); };
+  $("helpClose").onclick=function(){ $("helpModal").classList.remove("open"); };
+  $("helpModal").addEventListener("click",function(e){ if(e.target===$("helpModal")) $("helpModal").classList.remove("open"); });
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape") $("helpModal").classList.remove("open"); });
 
   $("probePlay").onclick=function(){ speakSeq([probeOrder[probeIdx].word]); };
   $("probeSentence").onclick=function(){ speakSeq([probeOrder[probeIdx].cue]); };
